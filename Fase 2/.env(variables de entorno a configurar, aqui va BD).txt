@@ -1,0 +1,56 @@
+# Postgres (libpq DSN — psycopg3)
+# DATABASE_URL=postgresql://barb_admin:barb_password123@localhost:5432/barb_database # Local
+DATABASE_URL=postgresql://postgres...... # configurar en Supabase o el servicios de BaaS de su agrado. Cabe recalcar que según alloxentric el proyecto legacy estaba levantado en AWS, pero aún no nos dán acceso para poder levantar el proyecto en esa infraestuctura.
+
+# --- Redis ---
+REDIS_URL=redis://localhost:6379/0
+
+# --- Archivos ---
+UPLOAD_DIR=./uploads
+
+# =============================================================================
+# PROVEEDOR LLM (Chat IA — HU-03)
+# =============================================================================
+# Valores válidos: "deepseek" | "openai" | "openrouter" | "groq"
+
+# Nvidia (Proveedor activo)
+LLM_PROVIDER=nvidia
+NVIDIA_API_KEY= #crear API desde https://build.nvidia.com/settings/api-keys
+NVIDIA_TIMEOUT=180
+
+# --- DeepSeek (proveedor inactivo - Respaldo) ---
+# 1. Crear cuenta en https://platform.deepseek.com
+# 2. Generar key en https://platform.deepseek.com/api_keys
+# 3. Recargar saldo mínimo $2 USD en https://platform.deepseek.com/top_up
+# 4. Pegar la key aquí sin comillas ni espacios
+DEEPSEEK_API_KEY=
+
+# --- OpenAI (legado — dejar vacío si no se usa) ---
+OPENAI_API_KEY=
+
+# --- OpenRouter (legado — dejar vacío si no se usa) ---
+OPENROUTER_API_KEY=
+
+# --- Groq (legado — dejar vacío si no se usa) ---
+GROQ_API_KEY=
+
+# --- Configuración del LLM ---
+# Modelo del proveedor activo:
+#   deepseek    → "deepseek-chat"
+#   openai      → "gpt-4o-mini"
+#   openrouter  → "meta-llama/llama-3.3-70b-instruct" (o ":free" al final)
+#   groq        → "llama-3.3-70b-versatile"
+LLM_MODEL=nvidia/nemotron-3.5-lightning-30b-a3b #Activo en estos momentos
+LLM_TEMPERATURE=0.7
+LLM_MAX_TOKENS=1024
+
+# --- Configuración del Chat (Memoria) ---
+# Número de interacciones (usuario+asistente) a recordar en la ventana de contexto
+CHAT_MEMORY_WINDOW=10
+
+# --- Resiliencia LLM (opcional) ---
+# Lista separada por coma de proveedores de respaldo. Ej: "openrouter,openai"
+LLM_FALLBACK_PROVIDERS=
+
+# CORS (coma-separado; además se permite *.vercel.app vía regex fijo)
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
